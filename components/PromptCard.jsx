@@ -21,7 +21,8 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
     }
 
     const handleTransfer = () => {
-        router.push('https://chat.openai.com/')
+        // router.push('https://chat.openai.com/')
+        window.open('https://chat.openai.com/', '_ blank')
     }
 
     return (

@@ -5,7 +5,6 @@ import { connectToDB } from '@utils/database'
 import Message from '@models/message'
 // import { NextApiRequest, NextApiResponse } from 'next'
 // import admin from "firebase-admin"
-import Message from '../../../models/message';
 
 
 export const POST = async (req, res) => {

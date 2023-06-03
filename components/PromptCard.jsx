@@ -4,17 +4,24 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { useSession } from 'next-auth/react'
 import { usePathname, useRouter } from 'next/navigation'
+import { toast } from "react-hot-toast"
 
 const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
     const [copied, setCopied] = useState('')
     const { data: session } = useSession()
     const pathName = usePathname()
     const router = useRouter()
+    const [prompt, setPrompt] = useState('')
 
     const handleCopy = () => {
         setCopied(post.prompt)
+        setPrompt(post.prompt)
         navigator.clipboard.writeText(post.prompt)
-        setTimeout(() => setCopied(""), 3000)
+        // setTimeout(() => setCopied(""), 3000)
+    }
+
+    const handleTransfer = () => {
+        router.push('https://chat.openai.com/')
     }
 
     return (
@@ -43,6 +50,15 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
                         height={12}
                     />
                 </div>
+
+                <div className='copy_btn' onClick={handleTransfer}>
+                    <Image
+                        src={'/assets/icons/openai-svgrepo-com.svg'}
+                        width={12}
+                        height={12}
+                    />
+                </div>
+
             </div>
             <p className='my-4 font-satoshi text-sm text-gray-700'>{post.prompt}</p>
             <p className='font-inter text-sm blue_gradient cursor-pointer'
@@ -69,7 +85,6 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
 
 
             )}
-
         </div>
     )
 }
